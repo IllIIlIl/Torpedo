@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Torpedo Launch Control</title>
+  <style>
+    body {
+      background-color: #0b1e2d;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-shadow: 0 0 10px #00ffcc;
+      margin-bottom: 1rem;
+    }
+
+    .console {
+      background-color: #112d3a;
+      border: 2px solid #00ffcc;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 0 20px #00ffcc66;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      background-color: #0f1a24;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background-color: #ff0033;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff003355;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #cc0029;
+    }
+
+    .status {
+      margin-top: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .success {
+      color: #00ff00;
+    }
+
+    .error {
+      color: #ff0033;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚓ Torpedo Launch Console</h1>
+  <div class="console">
+    <label for="coord1">Target Coordinates - Torpedo 1</label>
+    <input type="text" id="coord1" placeholder="e.g. 34.0522° N, 118.2437° W">
+
+    <label for="coord2">Target Coordinates - Torpedo 2</label>
+    <input type="text" id="coord2" placeholder="e.g. 51.5074° N, 0.1278° W">
+
+    <label for="coord3">Target Coordinates - Torpedo 3</label>
+    <input type="text" id="coord3" placeholder="e.g. 35.6895° N, 139.6917° E">
+
+    <button onclick="launchTorpedoes()">🚀 Launch Torpedoes</button>
+    <div id="status" class="status"></div>
+  </div>
+
+  <script>
+    function launchTorpedoes() {
+      const coord1 = document.getElementById("coord1").value.trim();
+      const coord2 = document.getElementById("coord2").value.trim();
+      const coord3 = document.getElementById("coord3").value.trim();
+
+      const allCoords = [coord1, coord2, coord3];
+
+      if (allCoords.every(c => c !== "")) {
+        console.log("Launching torpedoes at coordinates:", allCoords);
+        document.getElementById("status").textContent = "Launch successful!";
+        document.getElementById("status").className = "status success";
+      } else {
+        document.getElementById("status").textContent = "Error: All coordinates must be filled.";
+        document.getElementById("status").className = "status error";
+      }
+    }
+  </script>
+</body>
+</html>
